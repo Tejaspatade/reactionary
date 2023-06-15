@@ -1,39 +1,56 @@
 import { useReducer, useState } from "react";
 
+const initialState = { count: 0, step: 1 };
+
+// Reducer callback
 const reducer = (state, action) => {
-	console.log(state, action);
+	// action is set to the value/object passed in as argument to dispatch
+
+	// All the logic related to manipulating the state variable is now present in one place
+	switch (action.type) {
+		case "inc":
+			return { ...state, count: state.count + state.step };
+		case "dec":
+			return { ...state, count: state.count - state.step };
+		case "setCount":
+			return { ...state, count: action.payload };
+		case "setStep":
+			return { ...state, step: action.payload };
+		case "reset":
+			return initialState;
+
+		default:
+			throw new Error("Invalid Type of Action.");
+	}
 };
 
 function DateCounter() {
-	// const [count, setCount] = useState(0);
-	const [count, dispatch] = useReducer(reducer, 0);
-	const [step, setStep] = useState(1);
+	// Reducer Hook
+	const [state, dispatch] = useReducer(reducer, initialState);
 
-	// This mutates the date object.
+	const { count, step } = state;
 	const date = new Date("june 21 2027");
 	date.setDate(date.getDate() + count);
 
 	const dec = function () {
-		// setCount((count) => count - 1);
-		// setCount((count) => count - step);
+		// Passing in action as an object to dispatch
+		dispatch({ type: "dec" });
 	};
 
 	const inc = function () {
-		// setCount((count) => count + 1);
-		// setCount((count) => count + step);
+		dispatch({ type: "inc" });
 	};
 
 	const defineCount = function (e) {
-		// setCount(Number(e.target.value));
+		dispatch({ type: "setCount", payload: Number(e.target.value) });
 	};
 
 	const defineStep = function (e) {
-		setStep(Number(e.target.value));
+		dispatch({ type: "setStep", payload: Number(e.target.value) });
 	};
 
 	const reset = function () {
-		// setCount(0);
-		setStep(1);
+		dispatch({ type: "reset" });
 	};
 
 	return (
