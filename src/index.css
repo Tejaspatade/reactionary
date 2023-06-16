@@ -42,7 +42,8 @@ body {
 
 .app-header {
 	width: 66rem;
-	margin-bottom: 4rem;
+	margin-top: 6rem;
+	margin-bottom: 7rem;
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
