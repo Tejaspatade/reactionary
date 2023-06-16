@@ -6,8 +6,8 @@ const FinishPage = ({ score, totalPoints, highscore, dispatch }) => {
 
 	let emoji;
 	if (percentage === 0) emoji = "🤦🏼‍♂️";
-	if (percentage > 0 <= 50) emoji = "😐";
-	if (percentage > 50 <= 90) emoji = "😏";
+	if (percentage > 0) emoji = "😐";
+	if (percentage > 50) emoji = "😏";
 	if (percentage > 90) emoji = "🤓";
 
 	return (
