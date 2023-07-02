@@ -1,6 +1,10 @@
 import React from "react";
+import { useQuestions } from "../context/QuestionsContext";
 
-const FinishPage = ({ score, totalPoints, highscore, dispatch }) => {
+const FinishPage = () => {
+	// Consuming Context from QuestionsProvider with custom hook
+	const { score, totalPoints, highscore, dispatch } = useQuestions();
+
 	// Derived State
 	const percentage = (score / totalPoints) * 100;
 

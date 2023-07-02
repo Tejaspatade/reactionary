@@ -1,5 +1,11 @@
 import React from "react";
-const Options = ({ question, answer, dispatch }) => {
+import { useQuestions } from "../context/QuestionsContext";
+
+const Options = ({ question }) => {
+	// Consuming Context from QuestionsProvider with custom hook
+	const { answer, dispatch } = useQuestions();
+
+	// Derived State
 	const hasAnswered = answer !== null;
 
 	return (

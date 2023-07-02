@@ -3,10 +3,13 @@ import ReactDOM from "react-dom/client";
 
 import "./index.css";
 import App from "./components/App";
+import { QuestionsProvider } from "./context/QuestionsContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
-		<App />
+		<QuestionsProvider>
+			<App />
+		</QuestionsProvider>
 	</React.StrictMode>
 );

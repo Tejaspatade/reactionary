@@ -1,5 +1,10 @@
 import React from "react";
-const StartPage = ({ numQuestions, dispatch }) => {
+import { useQuestions } from "../context/QuestionsContext";
+
+const StartPage = () => {
+	// Consuming Context from QuestionsProvider with custom hook
+	const { numQuestions, dispatch } = useQuestions();
+
 	return (
 		<div className="start">
 			<h2>Are You Ready For A Quiz?</h2>

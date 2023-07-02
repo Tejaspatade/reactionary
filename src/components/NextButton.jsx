@@ -1,6 +1,10 @@
 import React from "react";
+import { useQuestions } from "../context/QuestionsContext";
 
-const NextButton = ({ dispatch, currAns, index, numQuestions }) => {
+const NextButton = () => {
+	// Consuming Context from QuestionsProvider with custom hook
+	const { dispatch, currAns: answer, index, numQuestions } = useQuestions();
+
 	// Conditional Rendering
 	if (currAns === null) return null;
 

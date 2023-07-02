@@ -1,6 +1,10 @@
 import React from "react";
+import { useQuestions } from "../context/QuestionsContext";
 
-const ProgressBar = ({ index, numQuestions, score, totalPoints, answer }) => {
+const ProgressBar = () => {
+	// Consuming Context from QuestionsProvider with custom hook
+	const { index, numQuestions, score, totalPoints, answer } = useQuestions();
+
 	return (
 		<header className="progress">
 			<progress
