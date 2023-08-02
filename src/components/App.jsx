@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React from "react";
 
 import Header from "./Header";
 import Main from "./Main";
@@ -12,6 +12,7 @@ import FinishPage from "./FinishPage";
 import Footer from "./Footer";
 import Timer from "./Timer";
 import { useQuestions } from "../context/QuestionsContext";
+// import Login from "./Login";
 
 const App = () => {
 	// Consuming Context from QuestionsProvider with custom hook
@@ -19,6 +20,7 @@ const App = () => {
 
 	return (
 		<div className="app">
+			{/* <Login /> */}
 			<Header />
 			<Main>
 				{status === "loading" && <Loader />}

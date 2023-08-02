@@ -1,4 +1,6 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { store } from "../config/firebase";
 
 // Context API
 const QuestionsContext = createContext();
@@ -68,6 +70,9 @@ const reducer = (state, action) => {
 	}
 };
 
+// Firestore collection reference
+const questionsCollectionRef = collection(store, "questions");
+
 const QuestionsProvider = ({ children }) => {
 	// Reducer for State
 	const [state, dispatch] = useReducer(reducer, initialState);
@@ -87,10 +92,19 @@ const QuestionsProvider = ({ children }) => {
 
 	// Fetching data from dummy API as a side-effect on mount
 	useEffect(() => {
-		fetch("http://localhost:8000/questions")
-			.then((res) => res.json())
-			.then((data) => dispatch({ type: "dataRecieved", payload: data }))
-			.catch((err) => dispatch({ type: "dataFailed" }));
+		// Get movies from Firebase
+		const getMovieList = async () => {
+			try {
+				const data = await getDocs(questionsCollectionRef);
+				const filtered = data.docs.map((doc) => ({ ...doc.data() }));
+				dispatch({ type: "dataRecieved", payload: filtered });
+			} catch (err) {
+				dispatch({ type: "dataFailed" });
+			}
+		};
+
+		// Invoking async function
+		getMovieList();
 	}, []);
 
 	return (

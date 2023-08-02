@@ -6,7 +6,7 @@ const NextButton = () => {
 	const { dispatch, currAns: answer, index, numQuestions } = useQuestions();
 
 	// Conditional Rendering
-	if (currAns === null) return null;
+	if (answer === null) return null;
 
 	if (index < numQuestions - 1)
 		return (
